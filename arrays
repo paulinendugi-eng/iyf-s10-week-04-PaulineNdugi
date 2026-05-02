@@ -1,1 +1,30 @@
+const fruits = ["apple", "banana", "orange"];
+const numbers = [1,2,3,4,5];
+const mixed = ["hello", 42, true, null];
+console.log(fruits[0]);
+console.log(fruits.length);
+fruits.push("grape");
+fruits.unshift("mango");
+fruits.pop();
+fruits.shift();
+
+const number= [1,2,3,4,5];
+number.forEach(num => console.log(num * 2));
+const doubled = numbers.map(num => num * 2);
+const evenNumbers = numbers.filter(num => num % 2 === 0);
+const firstEven = numbers.find(num => num % 2 === 0);
+const sum = numbers.reduce((total, num) => total + num, 0);
+console.log(numbers.includes(3));
+const nums = [3, -1, 7, -5, 15, 2, -8, 12];
+const doubleAll = nums.map(num => num * 2);
+console.log("Doubled:",  doubleAll);
+const positiveOnly = nums.filter(num => 0);
+console.log("Positives:", positiveOnly);
+const firstOver10 = nums.find(num => num > 10);
+console.log("First > 10:", firstOver10);
+const product = nums.reduce((total, num) => total * num, 1);
+console.log("Product:", product);
+
+
+
 
