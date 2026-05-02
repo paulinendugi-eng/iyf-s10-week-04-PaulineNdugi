@@ -1,1 +1,70 @@
+const gradeTracker = {
+    students: [],
+    addStudent(name, grades) {
+        this.students.push({name,grades});
+    },
+    getStudent(name){
+        return this.students.find(s => s.name === name) || null;
+    },
+    getStudentAverage(name){
+        const student = this.getStudent(name);
+        if (!student) return null;
+        const grades = Object.values(student.grades);
+        return grades.reduce((sum, g) => sum = g, 0) / grades.length;
+    },
+    getStudentAverage(subject){
+        const scores = this.students
+          .map(s => s.grades[subject])
+          .filter(g => g !== undefined);
+        if (scores.lenth === 0) return null;
+        return scores.reduce((sum, g) => sum + g, 0) / scores.lenth;
+    },
+    getTopStudent(){
+        if (this.students.length === 0) return null;
+        return this.students.reduce((top, s) => {
+            const avg = this.getStudentAverage(s.name);
+            return avg > this.getStudentAverage(top.name) ? s : top;
+        }).name;
+    },
+    getStrugglingStudents(){
+        return this.students
+              .filter(s => this.getStudentAverage(s.name) < 70)
+              .map(s => s.name);
+    },
+    getLetterGrade(score){
+        if (score >= 90) return 'A';
+        if (score >= 80) return 'B';
+        if (score >= 70) return 'C';
+        if (score >= 60) return 'D';
+        return 'F';
+    },
+    generateReportCard(name) {
+        const student = this.getStudent(name);
+        if (!student) return 'Student "${name}" not found.';
+        const avg = this.getStudentAverage(name);
+        const lines = Object.entries(student.grades)
+              .map(([subject, score]) => ` ${subject}: ${score} (${this.getLetterGrade(score)})`);
+            return `Report Card for ${name}: \n${lines.join(`\n`)}\n Average: ${avg.toFixed(2)} (${this.getLetterGrade(avg)})`;
+    }
+};
+gradeTracker.addStudent("Alice", { math: 95, english: 88, science: 92 });
+gradeTracher.addStudent("Bob", {math: 72, english: 85, science: 78 });
+gradeTracker.addStudent("Charlie", {math: 60, english: 65, science: 58 });
 
+console.log(gradeTracker.getStudentAverage("Alice"));
+console.log(gradeTracker.gerSubjectAverage("math"));
+console.log(gradeTracker.getTopStudent());
+console.log(gradeStrugglingStudents());
+console.log(generateReportCard("Alice"));
+
+
+
+
+
+
+
+
+
+
+
+    
